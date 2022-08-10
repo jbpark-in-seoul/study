@@ -11,8 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ApplicationContextExtendsFindTest {
-
+    /*
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
+
 
     @Configuration
     static class TestConfig() {
@@ -50,4 +51,5 @@ public class ApplicationContextExtendsFindTest {
             return new fixDiscountPolicy();
         }
     }
+     */
 }
