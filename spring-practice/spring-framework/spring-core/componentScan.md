@@ -8,6 +8,10 @@
      4. @Repository
      5. @Configuration
   + 관례적으로 프로젝트 최상단에 설정 파일을 위치 시킨다.
+  + 빈 등록 우선순위
+    * 이름이 같은 빈이 있는 경우, `ConflictBeanDefinitionException` 발생
+    * 자동 빈, 수동 빈이 있는 경우, 수동 빈으로 오버라이딩
+    * 스프링 부트에서는 기본적으로 `bean-definition-overriding=false`
 - 사용 방법
   + ~~~
     @Configuration
