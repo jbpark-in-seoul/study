@@ -1,10 +1,12 @@
 package hello.core;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Qualifier
 public class SampleServiceImpl implements SampleService {
     private final SampleRepository sampleRepository;
 }
