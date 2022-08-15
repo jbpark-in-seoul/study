@@ -3,6 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 /**
  * # 빈 생명주기 콜백
  * ## 스프링 빈 생명주기
@@ -13,10 +16,12 @@ import org.springframework.beans.factory.InitializingBean;
  *
  * ### 스프링 빈 생명주기 지원 콜백
  *  - 인터페이스(InitializingBean, DisposableBean)
+ *    + 스프링 종속적으로 권고되지 않음.
  *  - 설정 정보에 초기화 메서드, 종료 메서드 지정
- *  - @PostConstruct, @PreDestory 애노테이션 지원
+ *  - @PostConstruct, @PreDestory 애노테이션 지원 (권장 방식)
+ *    + 스프링에서 권장되는 방식
  */
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient {
 
     private String url;
 
@@ -40,14 +45,32 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("close: " + url);
     }
 
+    // 권장 방식
+    @PostConstruct
+    public void init() {
+        System.out.println("NetworkClient.init");
+        connect();
+        call("초기화 연결 메시지");
+    }
+
+    @PreDestroy
+    public void close() {
+        System.out.println("NetworkClient.close");
+        disconnect();
+    }
+
+    // 권장 X
+    /*
+    //implements InitializingBean
     @Override
     public void afterPropertiesSet() throws Exception {
         connect();
         call("초기화 연결 메세지");
     }
 
+    //implements DisposableBean
     @Override
     public void destroy() throws Exception {
         disconnect();
-    }
+    }*/
 }
