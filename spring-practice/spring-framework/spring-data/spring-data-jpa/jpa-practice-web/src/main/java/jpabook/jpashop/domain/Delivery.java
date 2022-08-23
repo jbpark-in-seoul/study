@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter
 @Setter
@@ -15,7 +17,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery") // 1:1일 때는, FK를 어디 둬도 상관 없으나, 장단이 있음 -> Access가 잦은 곳에 둠
+    @OneToOne(mappedBy = "delivery", fetch = LAZY) // 1:1일 때는, FK를 어디 둬도 상관 없으나, 장단이 있음 -> Access가 잦은 곳에 둠
     private Order order;
 
     @Embedded
