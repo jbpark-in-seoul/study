@@ -58,6 +58,16 @@ public class JpashopApplication {
       + fetch: @ManyToOne(fetch = Fectch.XXX)
         XXX: EAGER(즉시), LAZY(지연)
         XToOne 기본 값 -> EAGER, XToMany 기본 값 -> Lazy
+      + cascade: @ManyToOne(fetch = Fectch.LAZY, cascade = CascadeType.XXX)
+      	XXX: ALL, PERSIST, MERGE, REMOVE, REFRESH, DETACH
+      	  a.ALL: 상위 엔티티에서 하위 엔티티로 모든 작업을 전파
+      	  b.PERSIST: 하위 엔티티까지 영속성 전달 - Order Entity 저장 시, OrderItem Entity 도 저장
+      	  c.MERGE: 하위 엔티티까지 병합 작업을 지속 - Order Entity, Person Entity 조회 후 업데이트
+      	  d.REMOVE: 하위 엔티티까지 제거 작업을 지속 - 연결된 하위 엔티티까지 엔티티 제거
+      	  e.REFRESH: DB 로부터 인스턴스 값 다시 읽어오기, 연결된 하위 엔티티 인스턴스도 새로고침
+      	  f.DETACH: 영속성 컨텍스트에서 엔티티 제거, 연결된 하위 엔티티까지 영속성 제거
+      	* 다중 연관 관계의 Entity 인 경우, 주의해서 사용
+
   @JoinColumn
     - 외래 키를 매핑할 때 사용: @JoinColumn(name = "item_id")
 
@@ -70,4 +80,12 @@ public class JpashopApplication {
     - 싱글톤 동시성 이슈 방지
       + 스프링 컨테이너가 초기화되면서 @PersistenceContext로 주입 받은 EntityManager를 Proxy로 감싼다.
       + EntityManager 호출 마다 Proxy를 통해 EntityManager를 생성하여 Thread-safe를 보장한다.
+
+  @RequiredArgsConstructor
+    - final이나 @NonNull인 필드 값만 파라미터로 받는 생성자 만듦
+  @NoArgsConstructor
+	- 파라미터가 없는 기본 생성자를 생성
+  @AllArgsConstructor
+    - 모든 필드 값을 파라미터로 받는 생성자를 만듦
+
  */
