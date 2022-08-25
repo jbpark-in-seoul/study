@@ -33,6 +33,7 @@ public class OrderService {
 
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
+        delivery.setStatus(DeliveryStatus.READY);
 
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 
