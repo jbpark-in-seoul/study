@@ -1,4 +1,6 @@
-package hellojpa;
+package jpabook.jpashop;
+
+import jpabook.jpashop.domain.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,9 +19,6 @@ public class JpaMain {
         tx.begin();
 
         try {
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                            .getResultList();
-
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
